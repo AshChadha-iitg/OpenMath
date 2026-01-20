@@ -64,3 +64,40 @@ This project provides the fine-tuned adapter weights:
 
 > Note: This is **not a full model**.  
 > You must load the **base model** and then attach the adapter.
+
+---
+
+
+---
+
+## Disclaimer
+OpenMath is an educational/research project.  
+The fine-tuned model may produce incorrect, incomplete, or misleading answers.  
+Always verify solutions independently before using them for exams, assignments, or real-world decisions.
+
+This project does **not** guarantee correctness and should not be used as a substitute for professional advice.
+
+---
+
+## Contributing
+Contributions are welcome! 🎉
+
+If you’d like to contribute:
+1. Fork the repository
+2. Create a new branch (`feature/your-feature-name`)
+3. Commit your changes
+4. Open a Pull Request
+
+### Contribution Ideas
+- Train on larger GSM8K subsets (3k–5k samples)
+- Add SVAMP / ASDiv datasets for better generalization
+- Improve decoding to reduce repetition
+- Add a Streamlit demo for interactive testing
+- Benchmark against more open-source SLMs/LLMs
+- Improve evaluation scripts and metrics
+
+---
+
+## License
+This project is licensed under the **Apache License 2.0**.  
+See the [LICENSE](LICENSE) file for details.
