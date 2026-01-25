@@ -38,7 +38,7 @@ This project is designed to be reproducible on **free Colab (T4) GPU**.
 - Loss masking: trained mainly on the **solution portion** to improve reasoning
 
 ### Accuracy
-- **GSM8K Accuracy (100-sample test subset): ~30%**
+- **GSM8K Accuracy (100-sample test subset): 30%**
 
 > Note: The ~30% score was measured on a **100-question subset** of the GSM8K test set for faster evaluation on Colab.
 
