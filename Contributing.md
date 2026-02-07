@@ -2,7 +2,7 @@
 Thank you for your interest in contributing to this project! 🎉  
 We welcome contributions that improve training, evaluation, usability, and documentation.
 
-This repository focuses on **QLoRA fine-tuning** of **Qwen2.5-Math-1.5B** on the **GSM8K** dataset and sharing **LoRA adapter weights**.
+This repository focuses on **QLoRA (4-bit) fine-tuning** of **Qwen2.5-Math-1.5B** on the **GSM8K** dataset and sharing **LoRA adapter weights**.
 
 ---
 
@@ -17,6 +17,16 @@ This repository focuses on **QLoRA fine-tuning** of **Qwen2.5-Math-1.5B** on the
 • Sharing LoRA adapter weights (not full model weights)
 
 Please keep contributions meaningful, focused, and well-documented.
+
+---
+## 🚫 Out of Scope
+
+To keep the repository focused, the following contributions are **out of scope**:
+
+- Uploading or sharing **full model weights**
+- Use or inclusion of **proprietary or non-redistributable datasets**
+- Changes unrelated to QLoRA fine-tuning, evaluation, or documentation
+- Large binary artifacts or checkpoints committed to the repository
 
 ---
 
@@ -75,18 +85,23 @@ git checkout -b feature/your-feature-name
 | Bug Fixes / Refactoring | Fix bugs or clean existing code | More stable and maintainable code |
 
 ---
-## Pull Request Requirements
 
+## Pull Request Requirements
 
 **Every PR must include:**
 
-    - A clear summary of what changed
+- A clear summary of what changed
+- Why the change is useful
+- Scope confirmation (e.g., docs-only, evaluation-only, training-related)
 
-    - Why the change is useful
+**If the PR includes code changes (training or evaluation):**
 
-    - Scope confirmation (e.g., docs-only, evaluation-only)
+- Provide **reproducibility steps** (commands, configs, seeds if applicable)
+- Mention dataset splits and evaluation metrics used
+- Clearly state any new dependencies or configuration changes
 
-**PRs with Well-scoped , well-explained changes are preferred.**
+**PRs with well-scoped, well-explained, and reproducible changes are preferred.**
+
 
 ---
 
