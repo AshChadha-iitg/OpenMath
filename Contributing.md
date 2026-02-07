@@ -1,4 +1,4 @@
-# Contributing to OpenMath
+# Contributing to OpenMath  
 Thank you for your interest in contributing to this project! 🎉  
 We welcome contributions that improve training, evaluation, usability, and documentation.
 
