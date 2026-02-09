@@ -83,6 +83,17 @@ This project provides the fine-tuned adapter weights:
 
 ---
 
+## Inference Example
+
+An example script (`inference.py`) is provided to demonstrate how to:
+- Load the Qwen2.5-Math-1.5B base model
+- Attach the fine-tuned LoRA adapter
+- Run step-by-step math inference
+
+Note: Running the script requires downloading the base model from Hugging Face.
+
+---
+
 ## Disclaimer
 OpenMath is an educational/research project.  
 The fine-tuned model may produce incorrect, incomplete, or misleading answers.  
