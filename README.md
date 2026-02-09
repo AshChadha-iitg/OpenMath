@@ -82,6 +82,48 @@ This project provides the fine-tuned adapter weights:
 > You must load the **base model** and then attach the adapter.
 
 ---
+## Training
+
+To train the model yourself:
+
+1. **Install dependencies:**
+```bash
+pip install torch transformers peft datasets bitsandbytes accelerate
+```
+
+2. **Run training:**
+```bash
+python train.py --num_samples 1000 --num_epochs 6
+```
+
+3. **Output:**
+The trained model will be saved to `./checkpoints/`
+
+### Training Arguments
+
+| Argument | Description | Default |
+|----------|-------------|---------|
+| `--model_name` | Base model identifier | `Qwen/Qwen2.5-Math-1.5B` |
+| `--output_dir` | Output directory for checkpoints | `./checkpoints` |
+| `--num_samples` | Number of training samples | `1000` |
+| `--num_epochs` | Training epochs | `6` |
+| `--learning_rate` | Learning rate | `2e-4` |
+| `--batch_size` | Batch size per device | `4` |
+| `--lora_rank` | LoRA rank | `16` |
+| `--lora_alpha` | LoRA alpha | `32` |
+| `--max_length` | Max sequence length | `1024` |
+
+### Example: Train on More Data
+```bash
+python train.py --num_samples 5000 --num_epochs 4
+```
+
+For all options, run: `python train.py --help`
+
+### Requirements
+- GPU with 12GB+ VRAM (tested on Colab T4)
+- Training time: ~1.5 hours for 1000 samples, 6 epochs on T4
+
 
 ## Disclaimer
 OpenMath is an educational/research project.  
