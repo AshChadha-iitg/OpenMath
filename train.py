@@ -178,7 +178,14 @@ class GSM8KTrainer:
             Tokenized inputs with labels for training
         """
         # Format the prompt
-        prompt = f"Question: {examples['question']}\nAnswer: {examples['answer']}"
+        prompt = (
+            "### Instruction:\n"
+            "Solve the math problem step by step and give the final answer.\n\n"
+            "### Problem:\n"
+            f"{examples['question']}\n\n"
+            "### Solution:\n"
+            f"{examples['answer']}"
+        )
         
         # Tokenize
         tokenized = self.tokenizer(
@@ -190,22 +197,24 @@ class GSM8KTrainer:
         )
         
         # Create labels (same as input_ids for causal LM)
-        tokenized["labels"] = tokenized["input_ids"].copy()
-        
-        # Optional: Mask the question part to train only on answers
-        # This improves reasoning by focusing on solution generation
-        question_text = f"Question: {examples['question']}\nAnswer: "
-        question_tokens = self.tokenizer(
-            question_text,
-            truncation=True,
-            max_length=self.max_length,
-            padding=False,
-            return_tensors=None
-        )
-        
-        # Mask question tokens in labels (set to -100 to ignore in loss)
-        question_length = len(question_tokens["input_ids"])
-        tokenized["labels"][:question_length] = [-100] * question_length
+        labels = tokenized["input_ids"].copy()
+
+        solution_prefix = "### Solution:\n"
+        solution_ids = self.tokenizer(
+            solution_prefix,
+            add_special_tokens=False
+        )["input_ids"]
+
+        start_idx = None
+        for i in range(len(labels) - len(solution_ids)):
+            if labels[i:i + len(solution_ids)] == solution_ids:
+                start_idx = i + len(solution_ids)
+                break
+
+        if start_idx is not None:
+            labels[:start_idx] = [-100] * start_idx
+
+        tokenized["labels"] = labels
         
         return tokenized
     
@@ -268,12 +277,12 @@ class GSM8KTrainer:
         trainer.train()
         
         # Step 7: Save final model
-        print("\nSaving final model...")
-        trainer.save_model(self.output_dir)
+        print("\nSaving LoRA adapter...")
+        self.model.save_pretrained(self.output_dir)
         self.tokenizer.save_pretrained(self.output_dir)
-        
-        print(f"\n✓ Training complete! Model saved to: {self.output_dir}")
-        print(f"✓ LoRA adapters saved to: {self.output_dir}")
+
+        print(f"\n✓ Training complete!")
+        print(f"✓ LoRA adapter saved to: {self.output_dir}")
         
 
 def main():
