@@ -83,14 +83,35 @@ This project provides the fine-tuned adapter weights:
 
 ---
 
-## Inference Example
+## Setup and Usage
 
-An example script (`inference.py`) is provided to demonstrate how to:
-- Load the Qwen2.5-Math-1.5B base model
-- Attach the fine-tuned LoRA adapter
-- Run step-by-step math inference
+### Prerequisites
+- Python 3.8+
+- CUDA-enabled GPU (recommended, e.g., NVIDIA T4 or better)
 
-Note: Running the script requires downloading the base model from Hugging Face.
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AshChadha-iitg/OpenMath.git
+   cd OpenMath
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Running Inference
+The `inference.py` script is configured to load the fine-tuned LoRA adapter from the current directory and run a sample math problem.
+
+```bash
+python inference.py
+```
+
+You can also import the `solve_problem` function into your own Python scripts:
+```python
+from inference import solve_problem
+print(solve_problem("Your math problem here"))
+```
 
 ---
 
