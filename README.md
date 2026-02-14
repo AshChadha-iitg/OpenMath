@@ -44,6 +44,62 @@ This project is designed to be reproducible on **free Colab (T4) GPU**.
 
 ---
 
+
+## Training Format & Loss Masking
+
+### Training Prompt Template
+
+The model was trained using a structured prompt format designed to encourage step-by-step reasoning:
+
+```
+### Instruction:
+Solve the math problem step by step and give the final answer.
+
+### Problem:
+{question}
+
+### Solution:
+{answer}
+```
+
+`{question}` and `{answer}` represent dataset content placeholders.
+
+---
+
+### Loss Masking Strategy
+
+To improve reasoning quality, loss was computed **only on the solution portion**:
+
+- All tokens before `### Solution:` were masked with `-100`
+- Only tokens belonging to the solution contributed to training loss
+
+This encourages the model to focus on generating accurate reasoning steps rather than memorizing prompt structure.
+
+---
+
+### Special Tokens
+
+- No additional special tokens were introduced
+- Default tokenizer EOS token used as padding
+- Template headers serve as separators
+
+---
+
+### Inference Format
+
+During inference, the same prompt structure is used, but the solution portion is left empty:
+
+```
+### Instruction: ...
+### Problem: {question}
+### Solution:
+```
+
+The model then generates the reasoning and final answer.
+
+---
+
+
 ## GSM8K Leaderboard (Baseline)
 
 | Model | Params | GSM8K Accuracy (%) |
