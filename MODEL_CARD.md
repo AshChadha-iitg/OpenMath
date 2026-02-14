@@ -121,6 +121,46 @@ Users should:
 | Zephyr-7b-gemma-v0.1 | 7B | 45.56 |
 | Gemma | 7B | 46.4 |
 
+#### Benchmark Comparison Graph
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#4CAF50', 'primaryTextColor':'#000', 'primaryBorderColor':'#2E7D32', 'lineColor':'#1976D2', 'secondaryColor':'#FFC107', 'tertiaryColor':'#fff'}}}%%
+graph LR
+    subgraph "GSM8K Accuracy Comparison (%)"
+        A["Gemma 2 PT<br/>2B: 23.9%"] 
+        B["ERNIE 4.5<br/>21B: 25.2%"]
+        C["Baichuan<br/>13B: 26.6%"]
+        D["LLaMA 2<br/>13B: 28.7%"]
+        E["Qwen 3 IT<br/>1.7B: 33.66%"]
+        F["Mistral<br/>7B: 36.5%"]
+        G["LLaMA 3.2 IT<br/>1B: 39.04%"]
+        H["OpenMath<br/>1.5B: 41.0%"]
+        I["Gemma 3 IT<br/>1B: 42.15%"]
+        J["Zephyr-7b<br/>7B: 45.56%"]
+        K["Gemma<br/>7B: 46.4%"]
+    end
+    
+    style H fill:#4CAF50,stroke:#2E7D32,stroke-width:3px,color:#fff
+```
+
+**Performance Visualization:**
+
+```
+Gemma 2 PT (2B)         ████████████ 23.9%
+ERNIE 4.5 (21B)         █████████████ 25.2%
+Baichuan (13B)          ██████████████ 26.6%
+LLaMA 2 (13B)           ███████████████ 28.7%
+Qwen 3 IT (1.7B)        █████████████████ 33.66%
+Mistral (7B)            ███████████████████ 36.5%
+LLaMA 3.2 IT (1B)       ████████████████████ 39.04%
+OpenMath (1.5B)         █████████████████████ 41.0% ⭐
+Gemma 3 IT (1B)         █████████████████████ 42.15%
+Zephyr-7b (7B)          ███████████████████████ 45.56%
+Gemma (7B)              ████████████████████████ 46.4%
+                        |----|----|----|----|----|----|
+                        0   10   20   30   40   50
+```
+
 OpenMath achieves competitive performance compared to other small language models while being trained on only 1,000 samples and reproducible on free Colab resources.
 
 ## Technical Specifications
