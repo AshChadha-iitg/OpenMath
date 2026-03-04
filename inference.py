@@ -3,9 +3,9 @@ OpenMath — Minimal Inference (Colab T4, 1k-sample QLoRA)
 
 Folder structure expected:
 
-openmath-lora/
-  ├── adapter_model.safetensors
-  └── adapter_config.json
+
+adapter_model.safetensors
+adapter_config.json
 
 If your adapter folder has a different name, change ADAPTER_PATH below.
 """
@@ -22,7 +22,7 @@ from peft import PeftModel
 # CONFIG (MATCHES YOUR TRAINING)
 # ==========================
 BASE_MODEL = "Qwen/Qwen2.5-Math-1.5B"
-ADAPTER_PATH = "./openmath-lora"   # <-- PUT YOUR ADAPTER HERE
+ADAPTER_PATH = "."   # <-- PUT YOUR ADAPTER HERE
 
 # 4-bit QLoRA config (same as your T4 training)
 bnb_config = BitsAndBytesConfig(

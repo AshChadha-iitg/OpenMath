@@ -156,7 +156,7 @@ OpenMath/
 ├── adapter_config.json         #LoRA configuration
 ├── adapter_model.safetensors   #Fine-tuned LoRA weights
 ├── CONTRIBUTING.md             #Contribution guidelines
-├── inference.md                #Script for step-by-step math inference 
+├── inference.py                #Script for step-by-step math inference 
 ├── LICENSE                     #Apache 2.0 license
 └── README.md                   #OpenMath project Documentation
 
