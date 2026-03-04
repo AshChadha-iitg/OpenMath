@@ -148,6 +148,30 @@ An example script (`inference.py`) is provided to demonstrate how to:
 
 Note: Running the script requires downloading the base model from Hugging Face.
 
+### Usage (CLI)
+
+You can run `inference.py` with optional decoding controls and a Chain-of-Thought (CoT) toggle:
+
+ - Run deterministically (default):
+
+```bash
+python inference.py
+```
+
+ - Enable sampling with temperature and top-p:
+
+```bash
+python inference.py --temperature 0.7 --top_p 0.9 --max_new_tokens 300
+```
+
+ - Enable Chain-of-Thought prompting:
+
+```bash
+python inference.py --cot
+```
+
+These options allow quick experimentation with reasoning style and decoding parameters without editing the script.
+
 ---
 ##  Project Structure & Workflow 
 ### Repository Structure
