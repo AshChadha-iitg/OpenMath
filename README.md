@@ -223,6 +223,20 @@ Example request (POST /solve):
 
 Response contains the model's generated solution. Note: loading the model may download large files and requires sufficient compute (GPU recommended for reasonable performance).
 
+---
+
+## Evaluation
+
+A script `evaluate_gsm8k.py` is provided to run inference on the full GSM8K test split (1319 samples) and save per-sample results to CSV. It uses `inference.generate_solution()` to reuse the repository's prompt format and generation behavior.
+
+Quick run example:
+
+```bash
+python evaluate_gsm8k.py --adapter_path . --cot --outfile gsm8k_results.csv
+```
+
+Use `--limit N` to run a smaller subset for quick checks (e.g., `--limit 20`). The script performs a simple numeric-extraction heuristic to compare predicted and reference answers and writes detailed results to the CSV specified by `--outfile`.
+
 ## Project Scope Clarification
 
 This repository provides a QLoRA fine-tuning example and the resulting LoRA adapter for step-by-step math reasoning. It is focused on training, evaluation, and sharing the adapter weights for the `Qwen/Qwen2.5-Math-1.5B` base model.
