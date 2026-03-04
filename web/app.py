@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
 
 import inference
 
 app = FastAPI(title="OpenMath API", version="0.1")
+
+# Serve the simple frontend
+app.mount("/static", StaticFiles(directory="web/static"), name="static")
+
+
+@app.get("/ui")
+async def ui_index():
+    return FileResponse("web/static/index.html")
 
 
 class SolveRequest(BaseModel):
