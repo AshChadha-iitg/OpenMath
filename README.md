@@ -174,6 +174,31 @@ These options allow quick experimentation with reasoning style and decoding para
 
 ---
 
+## Web Interface (minimal API)
+
+A minimal FastAPI wrapper is included at `web/app.py` to expose the inference functionality via a REST API. This wrapper lazily loads the base model and adapter at runtime — ensure `adapter_model.safetensors` and `adapter_config.json` are present in the repository root before serving.
+
+Run locally (recommended in a virtualenv):
+
+```bash
+pip install -r requirements.txt
+uvicorn web.app:app --host 0.0.0.0 --port 8000
+```
+
+Example request (POST /solve):
+
+```json
+{
+      "problem": "If a store sells pencils at 3 for $1, how much do 15 pencils cost?",
+      "cot": false,
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_new_tokens": 200
+}
+```
+
+Response contains the model's generated solution. Note: loading the model may download large files and requires sufficient compute (GPU recommended for reasonable performance).
+
 ## Project Scope Clarification
 
 This repository provides a QLoRA fine-tuning example and the resulting LoRA adapter for step-by-step math reasoning. It is focused on training, evaluation, and sharing the adapter weights for the `Qwen/Qwen2.5-Math-1.5B` base model.

@@ -34,6 +34,7 @@ def parse_args():
     parser.add_argument("--cot", action="store_true", help="Enable Chain-of-Thought prompting (e.g. 'Let's think step by step')")
     return parser.parse_args()
 
+
 # 4-bit QLoRA config (same as your T4 training)
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
@@ -42,24 +43,71 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 
-# ==========================
-# LOAD TOKENIZER + MODEL
-# ==========================
-tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
-tokenizer.pad_token = tokenizer.eos_token
 
-base_model = AutoModelForCausalLM.from_pretrained(
-    BASE_MODEL,
-    quantization_config=bnb_config,
-    device_map="auto",
-)
+# Lazy-loaded globals
+_tokenizer = None
+_model = None
 
-# Attach your fine-tuned LoRA adapter
-model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
-model.eval()
 
-# Silence padding warning
-model.generation_config.pad_token_id = tokenizer.eos_token_id
+def load_model():
+    """Load tokenizer and model on demand. Returns (tokenizer, model)."""
+    global _tokenizer, _model
+    if _tokenizer is not None and _model is not None:
+        return _tokenizer, _model
+
+    _tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
+    _tokenizer.pad_token = _tokenizer.eos_token
+
+    base_model = AutoModelForCausalLM.from_pretrained(
+        BASE_MODEL,
+        quantization_config=bnb_config,
+        device_map="auto",
+    )
+
+    _model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
+    _model.eval()
+    _model.generation_config.pad_token_id = _tokenizer.eos_token_id
+
+    return _tokenizer, _model
+
+
+def generate_solution(problem: str, cot: bool = False, temperature: float = 0.0, top_p: float = 1.0, max_new_tokens: int = 200):
+    """Generate a solution for a given `problem` string using the loaded model.
+
+    This function keeps the same prompt format used during training and mirrors
+    the CLI behavior. It will lazily load the model/tokenizer if needed.
+    """
+    tokenizer, model = load_model()
+
+    cot_preamble = "" if not cot else "Let's think step by step.\n\n"
+
+    prompt = (
+        "### Instruction:\n"
+        "Solve the math problem step by step and give the final answer.\n\n"
+        "### Problem:\n"
+        f"{problem}\n\n"
+        "### Solution:\n"
+        f"{cot_preamble}"
+    )
+
+    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+
+    do_sample = True if temperature and temperature > 0.0 else False
+
+    gen_kwargs = dict(
+        **inputs,
+        max_new_tokens=max_new_tokens,
+        do_sample=do_sample,
+        temperature=temperature if do_sample else None,
+        top_p=top_p,
+        repetition_penalty=1.1,
+        no_repeat_ngram_size=3,
+    )
+
+    with torch.no_grad():
+        outputs = model.generate(**gen_kwargs)
+
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # ==========================
 # RUN / PROMPT

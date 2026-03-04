@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+transformers
+peft
+bitsandbytes
+torch
+pydantic
