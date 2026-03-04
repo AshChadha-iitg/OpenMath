@@ -225,6 +225,26 @@ Response contains the model's generated solution. Note: loading the model may do
 
 ---
 
+## Interactive Dashboard (Streamlit)
+
+An experimental Streamlit dashboard is available at `web/streamlit_dashboard.py` to provide an interactive problem solver and a simple batch-evaluation interface.
+
+Run the dashboard locally after installing requirements:
+
+```bash
+pip install -r requirements.txt
+streamlit run web/streamlit_dashboard.py --server.port 8501
+```
+
+Features:
+
+- **Live Problem Solver**: enter a math problem and get a step-by-step solution.
+- **Batch Evaluation**: upload a CSV/JSON file with a problem column (and optional answer column) to run a configurable batch evaluation and download results as CSV.
+- **Simple Metrics**: overall accuracy (based on a numeric-extraction heuristic) and per-sample results.
+
+Note: This dashboard is a lightweight demo to help analyze model outputs and is not intended as a full analytics platform. It calls `inference.generate_solution()` and therefore requires a configured base model and adapter.
+
+
 ## Evaluation
 
 A script `evaluate_gsm8k.py` is provided to run inference on the full GSM8K test split (1319 samples) and save per-sample results to CSV. It uses `inference.generate_solution()` to reuse the repository's prompt format and generation behavior.

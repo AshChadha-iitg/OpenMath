@@ -30,3 +30,6 @@ pydantic
 # - For GPU support, install a CUDA-compatible build of torch as documented
 #   at https://pytorch.org/get-started/locally/ (the plain `torch` spec
 #   above may pull a CPU-only build on some platforms). Adjust as needed.
+# Streamlit dashboard and data handling
+streamlit
+pandas
