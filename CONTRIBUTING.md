@@ -2,6 +2,10 @@
 Thank you for your interest in contributing to this project! 🎉  
 We welcome contributions that improve training, evaluation, usability, and documentation.
 
+## Code of Conduct
+
+Please read and follow our Code of Conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). All contributors, maintainers and participants are expected to adhere to it.
+
 This repository focuses on **QLoRA (4-bit) fine-tuning** of **Qwen2.5-Math-1.5B** on the **GSM8K** dataset and sharing **LoRA adapter weights**.
 
 ---

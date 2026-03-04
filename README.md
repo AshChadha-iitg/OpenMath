@@ -343,6 +343,8 @@ If you’d like to contribute:
 3. Commit your changes
 4. Open a Pull Request
 
+Please follow our Code of Conduct when participating in this project: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ### Contribution Ideas
 - Run full GSM8K test evaluation (1319 samples) and report results
 - Train on larger GSM8K subsets (3k–5k samples)
