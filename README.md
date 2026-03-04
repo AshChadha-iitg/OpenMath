@@ -257,6 +257,50 @@ This repository has been developed and tested with the following environment rec
 - **Python**: 3.10 or 3.11 are recommended.
 - **PyTorch / CUDA**: For GPU training and reasonable performance, install a CUDA-compatible `torch` build following the official PyTorch instructions for your CUDA version (for example CUDA 11.7 or CUDA 11.8). Use the command from https://pytorch.org/get-started/locally/ to select the right wheel.
 - **Notes**: The `requirements.txt` lists minimum recommended package versions for `transformers`, `peft`, `bitsandbytes`, and other tooling. On systems without GPUs, `torch` may install a CPU-only wheel — training will be slower and may not be practical for full runs.
+## Environment setup
+
+Follow these steps to create a reproducible Python environment and install dependencies:
+
+1. Create and activate a virtual environment (recommended):
+
+      - On Windows (PowerShell):
+
+        ```powershell
+        python -m venv .venv
+        .\.venv\Scripts\Activate.ps1
+        ```
+
+      - On Unix / macOS:
+
+        ```bash
+        python3 -m venv .venv
+        source .venv/bin/activate
+        ```
+
+2. Upgrade `pip` and install requirements:
+
+      ```bash
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      ```
+
+3. GPU / CUDA notes:
+
+      - For GPU acceleration, install a CUDA-compatible `torch` wheel using the
+        instructions at https://pytorch.org/get-started/locally/ for your CUDA
+        version (for example CUDA 11.7 or 11.8). The plain `pip install -r
+        requirements.txt` may install a CPU-only `torch` on some platforms — if
+        you need GPU support, follow the PyTorch selector and install its
+        recommended command before or after installing the rest of the
+        requirements.
+
+4. Quick verification:
+
+      ```bash
+      python -c "import torch, transformers, peft; print(torch.__version__)"
+      ```
+
+These steps satisfy the environment setup requested in issue #22.
 ##  Project Structure & Workflow 
 ### Repository Structure
 
