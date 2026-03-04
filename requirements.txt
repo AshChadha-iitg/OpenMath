@@ -17,6 +17,9 @@ notebook
 matplotlib
 seaborn
 
+# Binary format helpers
+safetensors
+
 # Minimal deps for the optional FastAPI demo
 fastapi
 uvicorn[standard]

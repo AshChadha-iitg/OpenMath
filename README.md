@@ -249,6 +249,14 @@ It is not a general-purpose Python math utilities library. Requests that ask for
 If you're unsure whether a proposed change fits this repository, open an issue describing the change and tag it with an implementation proposal. Maintainers will advise whether the change should be submitted here or in a separate repository.
 
 ---
+
+## Environment Notes
+
+This repository has been developed and tested with the following environment recommendations:
+
+- **Python**: 3.10 or 3.11 are recommended.
+- **PyTorch / CUDA**: For GPU training and reasonable performance, install a CUDA-compatible `torch` build following the official PyTorch instructions for your CUDA version (for example CUDA 11.7 or CUDA 11.8). Use the command from https://pytorch.org/get-started/locally/ to select the right wheel.
+- **Notes**: The `requirements.txt` lists minimum recommended package versions for `transformers`, `peft`, `bitsandbytes`, and other tooling. On systems without GPUs, `torch` may install a CPU-only wheel — training will be slower and may not be practical for full runs.
 ##  Project Structure & Workflow 
 ### Repository Structure
 
