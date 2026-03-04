@@ -173,6 +173,19 @@ python inference.py --cot
 These options allow quick experimentation with reasoning style and decoding parameters without editing the script.
 
 ---
+
+## Project Scope Clarification
+
+This repository provides a QLoRA fine-tuning example and the resulting LoRA adapter for step-by-step math reasoning. It is focused on training, evaluation, and sharing the adapter weights for the `Qwen/Qwen2.5-Math-1.5B` base model.
+
+It is not a general-purpose Python math utilities library. Requests that ask for broad mathematical utility modules (for example: adding extensive numeric validation across unrelated math modules) are considered out-of-scope for this repository. If you want to contribute a math utilities package, please consider one of these options:
+
+- Open a focused issue proposing the specific utility with a short design and example usage; maintainers may accept a small, well-scoped contribution as a separate module or a documentation addition.
+- Create a separate repository (or a module under a tooling organization) that implements the math utilities and submit a PR linking back to this project if integration is desired.
+
+If you're unsure whether a proposed change fits this repository, open an issue describing the change and tag it with an implementation proposal. Maintainers will advise whether the change should be submitted here or in a separate repository.
+
+---
 ##  Project Structure & Workflow 
 ### Repository Structure
 
