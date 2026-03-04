@@ -170,7 +170,31 @@ python inference.py --temperature 0.7 --top_p 0.9 --max_new_tokens 300
 python inference.py --cot
 ```
 
+
 These options allow quick experimentation with reasoning style and decoding parameters without editing the script.
+
+### CLI & Interactive Usage
+
+You can test single problems from the command line:
+
+```bash
+python inference.py --question "If a store sells pencils at 3 for $1, how much do 15 pencils cost?"
+```
+
+To override the base model or adapter path (for custom checkpoints):
+
+```bash
+python inference.py --question "..." --base_model ./checkpoints/base --adapter_path ./checkpoints/lora
+```
+
+Interactive mode (default when run without `--question`):
+
+```bash
+python inference.py
+# then type problems at the `Problem>` prompt; submit an empty line to exit
+```
+
+These modes implement Issue #12: they let you quickly test trained adapters, run interactive prompt sessions, and pass custom checkpoint paths.
 
 ---
 
