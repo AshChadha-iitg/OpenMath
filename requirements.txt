@@ -1,0 +1,35 @@
+# Core ML / training
+torch>=2.0.0
+transformers>=4.36.0
+peft>=0.7.0
+bitsandbytes>=0.41.0
+
+# Datasets / evaluation
+datasets>=2.14.0
+evaluate>=0.4.0
+
+# Training acceleration / distributed
+accelerate>=0.25.0
+
+# Optional / tooling
+jupyter
+notebook
+matplotlib
+seaborn
+
+# Binary format helpers
+safetensors
+
+# Minimal deps for the optional FastAPI demo
+fastapi
+uvicorn[standard]
+pydantic
+
+# Notes:
+# - This file contains minimum recommended versions used by the project.
+# - For GPU support, install a CUDA-compatible build of torch as documented
+#   at https://pytorch.org/get-started/locally/ (the plain `torch` spec
+#   above may pull a CPU-only build on some platforms). Adjust as needed.
+# Streamlit dashboard and data handling
+streamlit
+pandas

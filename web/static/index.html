@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OpenMath — Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width:900px; margin:2rem auto; padding:1rem; }
+    textarea { width:100%; height:140px; font-size:14px }
+    input[type=text], input[type=number] { width:100%; padding:6px }
+    .row { margin:8px 0 }
+    button { padding:8px 12px; font-size:14px }
+    pre { background:#f6f6f6; padding:12px; white-space:pre-wrap }
+  </style>
+</head>
+<body>
+  <h1>OpenMath — Web Demo</h1>
+  <p>Enter a math problem and press <strong>Solve</strong>. The demo uses the repository's inference API.</p>
+
+  <div class="row">
+    <label for="problem">Problem</label>
+    <textarea id="problem">If a store sells pencils at 3 for $1, how much do 15 pencils cost?</textarea>
+  </div>
+
+  <div class="row">
+    <label><input type="checkbox" id="cot"> Enable Chain-of-Thought (CoT)</label>
+  </div>
+
+  <div class="row">
+    <label for="temperature">Temperature</label>
+    <input id="temperature" type="number" step="0.1" value="0.0">
+  </div>
+
+  <div class="row">
+    <label for="top_p">Top-p</label>
+    <input id="top_p" type="number" step="0.01" value="1.0">
+  </div>
+
+  <div class="row">
+    <label for="max_new_tokens">Max new tokens</label>
+    <input id="max_new_tokens" type="number" value="200">
+  </div>
+
+  <div class="row">
+    <button id="solve">Solve</button>
+    <button id="clear">Clear</button>
+  </div>
+
+  <h3>Solution</h3>
+  <pre id="output">(no output yet)</pre>
+
+  <script>
+    async function solve() {
+      const problem = document.getElementById('problem').value;
+      const cot = document.getElementById('cot').checked;
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const top_p = parseFloat(document.getElementById('top_p').value);
+      const max_new_tokens = parseInt(document.getElementById('max_new_tokens').value, 10);
+
+      document.getElementById('output').textContent = 'Running... (this may take a while while the model loads)';
+
+      try {
+        const res = await fetch('/solve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ problem, cot, temperature, top_p, max_new_tokens })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          document.getElementById('output').textContent = 'Error: ' + (err.detail || res.statusText);
+          return;
+        }
+
+        const data = await res.json();
+        document.getElementById('output').textContent = data.solution;
+      } catch (e) {
+        document.getElementById('output').textContent = 'Network error: ' + e;
+      }
+    }
+
+    document.getElementById('solve').addEventListener('click', solve);
+    document.getElementById('clear').addEventListener('click', () => { document.getElementById('output').textContent = '(no output yet)'; });
+  </script>
+</body>
+</html>
