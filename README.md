@@ -425,6 +425,14 @@ OpenMath is a **fun and practical side project** built to explore **efficient fi
 The goal is to learn, experiment, and share reproducible results — while keeping the code clean and open for community improvements.
 
 ---
+---
+
+## Contributors
+
+Thanks to these amazing people who contributed to this project:
+
+[![Contributors](https://contrib.rocks/image?repo=Adityakumarchaurasiya/OPENMATH)](https://github.com/Adityakumarchaurasiya/OPENMATH/graphs/contributors)
+
 
 ## License
 This project is licensed under the **Apache License 2.0**.  
